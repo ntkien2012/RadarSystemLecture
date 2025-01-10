@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 1 (Cập Nhật)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 1)</h1>
+
+<p class="note">
+  Dưới đây là nội dung tổng hợp bài giảng đầu tiên về Radar, 
+  có tham khảo nội dung từ các video sau:
+  <br/>
+  <a href="https://www.youtube.com/watch?v=Hw5IaS6-Fzw" target="_blank">Video 1</a>,
+  <a href="https://www.youtube.com/watch?v=R70ysC8nWoI" target="_blank">Video 2</a>,
+  <a href="https://www.youtube.com/watch?v=EKIzwmjT8SQ" target="_blank">Video 3</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu chung về Radar</h2>
+
+<h3>1.1. Khái niệm</h3>
+<p>
+  <strong>Radar</strong> (viết tắt của “Radio Detection and Ranging”) là một hệ thống điện tử sử dụng sóng điện từ 
+  (thường ở băng tần vô tuyến hoặc vi ba) để phát hiện mục tiêu, đo khoảng cách, tốc độ và góc phương vị (hoặc độ cao) 
+  của mục tiêu so với trạm radar. 
+</p>
+
+<h3>1.2. Tầm quan trọng</h3>
+<p>
+  Radar có khả năng hoạt động <em>trong mọi điều kiện thời tiết</em> (ngày, đêm, mưa, sương mù), 
+  trở thành công nghệ then chốt trong nhiều lĩnh vực: quân sự, an ninh, hàng không, hàng hải, kiểm soát giao thông, 
+  khí tượng, thám hiểm vũ trụ, v.v.
+</p>
+
+<h3>1.3. Lịch sử phát triển</h3>
+<ul>
+  <li><strong>Thế kỷ 19</strong>: Heinrich Hertz chứng minh sóng điện từ có khả năng phản xạ trên bề mặt kim loại.</li>
+  <li><strong>Trước Thế chiến II</strong>: Nhiều thí nghiệm quy mô nhỏ về phát hiện mục tiêu bằng sóng vô tuyến.</li>
+  <li><strong>Thế chiến II</strong>: Radar được phát triển mạnh để phát hiện máy bay, tàu ngầm và hỗ trợ điều khiển hỏa lực.</li>
+  <li><strong>Sau Thế chiến II</strong>: Ứng dụng mở rộng sang giám sát hàng không, hàng hải, dự báo thời tiết, trinh sát vũ trụ, v.v.</li>
+</ul>
+
+<hr/>
+
+<h2>2. Nguyên lý hoạt động của Radar</h2>
+
+<h3>2.1. Quy trình hoạt động cơ bản</h3>
+<ol>
+  <li><strong>Phát sóng (Transmission)</strong>: Radar tạo các xung điện từ ở tần số mong muốn, khuếch đại 
+    rồi phát qua ăng-ten.</li>
+  <li><strong>Lan truyền sóng (Propagation)</strong>: Sóng điện từ di chuyển trong môi trường (không khí, chân không). 
+    Đặc tính lan truyền phụ thuộc tần số, công suất, ảnh hưởng khí quyển.</li>
+  <li><strong>Phản xạ (Reflection)</strong>: Sóng gặp mục tiêu sẽ phản xạ trở lại (Backscatter). 
+    Mức độ phản xạ phụ thuộc diện tích phản xạ radar (RCS) của mục tiêu.</li>
+  <li><strong>Thu tín hiệu (Reception)</strong>: Ở chế độ thu, ăng-ten thu sóng phản xạ, tín hiệu về rất yếu nên cần 
+    bộ khuếch đại nhiễu thấp (LNA) và mạch trộn tần (Mixer).</li>
+  <li><strong>Xử lý &amp; hiển thị (Signal Processing &amp; Display)</strong>: Tín hiệu qua các bước lọc, khuếch đại, 
+    chuyển đổi A/D, sau đó tính toán thông số (khoảng cách, tốc độ, góc) rồi hiển thị trên màn hình (PPI, A-scope…).</li>
+</ol>
+
+<h3>2.2. Phép đo khoảng cách và hiệu ứng Doppler</h3>
+<ul>
+  <li>
+    <strong>Đo khoảng cách:</strong> Dựa vào thời gian trễ giữa lúc phát và thu. Công thức cơ bản:
+    <br/>
+    <code>R = (c * Δt) / 2</code>, 
+    trong đó <code>c</code> xấp xỉ <code>3 × 10^8 m/s</code>, <code>Δt</code> là thời gian trễ.
+  </li>
+  <li>
+    <strong>Hiệu ứng Doppler:</strong> Nếu mục tiêu chuyển động, tần số phản xạ bị dịch Doppler so với tần số phát. 
+    Radar có thể tính được vận tốc hướng tâm của mục tiêu (radial velocity).
+  </li>
+</ul>
+
+<p>
+  Một số nội dung trong <em>Video 1</em> (<a href="https://www.youtube.com/watch?v=Hw5IaS6-Fzw" target="_blank">Link</a>) nhấn mạnh 
+  tầm quan trọng của hiệu ứng Doppler để phân biệt mục tiêu chuyển động với nền tĩnh, góp phần giảm nhiễu clutter.
+</p>
+
+<hr/>
+
+<h2>3. Các thành phần chính của hệ thống Radar</h2>
+
+<h3>3.1. Máy phát (Transmitter)</h3>
+<p>
+  Bao gồm bộ tạo xung (Pulse Generator), bộ khuếch đại công suất (Power Amplifier) như 
+  Magnetron, Klystron, TWT, hoặc bán dẫn (GaN, GaAs). Modulator định hình dạng xung, thiết lập PRF (Pulse Repetition Frequency).
+</p>
+
+<h3>3.2. Ăng-ten (Antenna)</h3>
+<ul>
+  <li><strong>Ăng-ten parabol (Parabolic Dish)</strong>: Tạo búp sóng hẹp, tập trung năng lượng.</li>
+  <li><strong>Ăng-ten mảng pha (Phased Array)</strong>: Điều khiển pha từng phần tử, quét điện tử nhanh, độ chính xác cao.</li>
+  <li><strong>T/R Switch hoặc Duplexer</strong>: Chuyển mạch giữa chế độ phát và thu, bảo vệ bộ thu.</li>
+</ul>
+
+<h3>3.3. Bộ thu (Receiver)</h3>
+<p>
+  Ở <em>Video 2</em> (<a href="https://www.youtube.com/watch?v=R70ysC8nWoI" target="_blank">Link</a>) có trình bày chi tiết 
+  về các bước xử lý trong bộ thu: từ bộ tiền khuếch đại nhiễu thấp (LNA), bộ trộn (Mixer) chuyển xuống tần trung (IF), 
+  sau đó qua các mạch khuếch đại và lọc để tách tín hiệu mục tiêu.
+</p>
+
+<h3>3.4. Bộ xử lý tín hiệu (Signal Processor)</h3>
+<ul>
+  <li><strong>Lọc MTI (Moving Target Indicator)</strong>: Nhận diện mục tiêu chuyển động qua tín hiệu Doppler.</li>
+  <li><strong>Doppler Filter, FFT</strong>: Tách bạch các dải tần ứng với vận tốc khác nhau.</li>
+  <li><strong>CFAR (Constant False Alarm Rate)</strong>: Thiết lập ngưỡng phát hiện thích nghi, giữ tỉ lệ báo động giả ổn định.</li>
+</ul>
+
+<h3>3.5. Hệ thống hiển thị (Display)</h3>
+<p>
+  Thường là màn hình PPI (Plan Position Indicator) – hiển thị toàn cảnh 360°, hoặc A-scope, B-scope… 
+  Các radar hiện đại tích hợp hệ thống số, giao diện thân thiện, khả năng lưu trữ dữ liệu lâu dài.
+</p>
+
+<hr/>
+
+<h2>4. Các thông số kỹ thuật quan trọng</h2>
+
+<ol>
+  <li>
+    <strong>Tần số làm việc (Operating Frequency)</strong>: Quyết định độ phân giải, khả năng xuyên mây và 
+    kích thước ăng-ten (bước sóng càng nhỏ thì ăng-ten càng nhỏ).
+  </li>
+  <li>
+    <strong>Công suất phát (Transmit Power)</strong>: Ảnh hưởng trực tiếp đến tầm phát hiện tối đa. 
+    Radar xung thường có công suất đỉnh rất lớn (kW đến MW) nhưng công suất trung bình thấp hơn (do thời gian xung ngắn).
+  </li>
+  <li>
+    <strong>Băng thông (Bandwidth)</strong>: Băng thông lớn => độ phân giải cự ly tốt. 
+    Công thức xấp xỉ: 
+    <br/>
+    <code>ΔR ≈ c / (2B)</code>.
+  </li>
+  <li>
+    <strong>Thời lượng xung (Pulse Width) và PRF</strong>: 
+    <ul>
+      <li>Thời lượng xung ngắn => độ phân giải tốt, nhưng đòi hỏi công suất đỉnh lớn.</li>
+      <li>PRF cao => tăng tốc độ cập nhật, nhưng có thể gây nhầm lẫn cự ly (range ambiguity).</li>
+    </ul>
+  </li>
+  <li>
+    <strong>Độ lợi ăng-ten (Antenna Gain)</strong>, 
+    <strong>Beamwidth</strong>: 
+    quyết định khả năng tập trung năng lượng và phân giải góc.
+  </li>
+  <li>
+    <strong>Hệ số phản xạ radar (RCS)</strong>: 
+    Thay đổi theo hình dạng, vật liệu, góc tới của mục tiêu; 
+    quyết định mức độ sóng phản xạ thu về.
+  </li>
+</ol>
+
+<hr/>
+
+<h2>5. Ứng dụng của Radar trong đời sống</h2>
+
+<p>
+  <em>Video 3</em> (<a href="https://www.youtube.com/watch?v=EKIzwmjT8SQ" target="_blank">Link</a>) có minh họa các ứng dụng phong phú của radar:
+</p>
+
+<ul>
+  <li><strong>Quân sự</strong>: Phòng không, cảnh giới, dẫn bắn tên lửa, trinh sát điện tử.</li>
+  <li><strong>Hàng không &amp; Hàng hải</strong>: Kiểm soát không lưu, tránh va chạm tàu biển, dẫn đường.</li>
+  <li><strong>Khí tượng</strong>: Radar thời tiết (Doppler Weather Radar) xác định vận tốc gió, tâm bão, cường độ mưa.</li>
+  <li><strong>Giao thông</strong>: Radar đo tốc độ (Speed Gun), radar ô tô giúp cảnh báo va chạm.</li>
+  <li><strong>Công nghiệp</strong>: Giám sát mức bồn chứa, an ninh nhà máy, radar xuyên đất khảo sát công trình ngầm.</li>
+  <li><strong>Vũ trụ</strong>: Theo dõi vệ tinh, rác vũ trụ, nghiên cứu bề mặt hành tinh bằng Radar thiên văn (Planetary Radar).</li>
+</ul>
+
+<hr/>
+
+<h2>6. Kết luận</h2>
+
+<p>
+  Bài giảng đầu tiên đã cung cấp nền tảng về:
+</p>
+
+<ul>
+  <li><strong>Khái niệm và tầm quan trọng của radar.</strong></li>
+  <li><strong>Nguyên lý hoạt động</strong>: Tạo xung, lan truyền, phản xạ, thu và xử lý tín hiệu.</li>
+  <li><strong>Các thành phần chính</strong>: Máy phát, ăng-ten, bộ thu, xử lý tín hiệu, hiển thị.</li>
+  <li><strong>Thông số kỹ thuật</strong>: Tần số, công suất, băng thông, độ lợi ăng-ten, RCS.</li>
+  <li><strong>Ứng dụng thực tế</strong> phong phú trong quân sự, hàng không – hàng hải, khí tượng, giao thông, công nghiệp và vũ trụ.</li>
+</ul>
+
+<p>
+  Trong những bài giảng tiếp theo, chúng ta sẽ đi sâu hơn vào các kỹ thuật xử lý tín hiệu, 
+  phân loại radar (Radar xung Doppler, Radar FMCW, Radar thụ động...), cũng như 
+  những xu hướng mới như radar mảng pha (AESA), radar băng rộng, radar tích hợp AI, v.v.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>

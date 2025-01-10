@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 6</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 6)</h1>
+
+<p class="note">
+  Nội dung tổng hợp từ các video tham khảo:  
+  <a href="https://www.youtube.com/watch?v=p2ify-2DQdE" target="_blank">Video 1</a>,  
+  <a href="https://www.youtube.com/watch?v=wNrrTKHZrns" target="_blank">Video 2</a>,  
+  <a href="https://www.youtube.com/watch?v=wNrrTKHZrns" target="_blank">Video 3 (trùng link với Video 2)</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+  Trong <strong>Bài giảng 6</strong>, chúng ta đi sâu hơn vào một chủ đề rất quan trọng của radar hiện đại: 
+  <em>Radar chụp ảnh (Imaging Radar)</em>, cụ thể là <strong>SAR (Synthetic Aperture Radar)</strong> và 
+  <strong>ISAR (Inverse Synthetic Aperture Radar)</strong>. 
+  Đây là những kỹ thuật giúp tạo ảnh độ phân giải cao của bề mặt địa hình, tàu biển, máy bay... 
+  ngay cả trong điều kiện thời tiết khắc nghiệt hoặc ban đêm.
+</p>
+
+<p>
+  Bên cạnh đó, bài giảng còn đề cập đến <strong>các thuật toán xử lý ảnh radar</strong> và 
+  <strong>ứng dụng thực tế</strong> của SAR/ISAR. 
+  Dưới đây là phần tóm tắt những nội dung chính rút ra từ các video và bài giảng.
+</p>
+
+<hr/>
+
+<h2>2. Tổng quan về Radar chụp ảnh</h2>
+
+<h3>2.1. Khái niệm cơ bản</h3>
+<p>
+  <strong>Radar chụp ảnh (Imaging Radar)</strong> là phương pháp dùng sóng radar để thu thập dữ liệu phản xạ theo 
+  không gian và thời gian, sau đó xử lý để tái tạo thành <em>bản đồ ảnh 2D</em> hoặc thậm chí <em>3D</em> của khu vực hoặc mục tiêu.
+</p>
+<ul>
+  <li><strong>Ưu điểm</strong>: Hoạt động xuyên mây, sương mù, độ phân giải cao kể cả ban đêm, thích hợp cho quan sát tầm xa.</li>
+  <li><strong>Nhược điểm</strong>: Thuật toán xử lý phức tạp, yêu cầu dữ liệu lớn, đòi hỏi phần cứng tính toán (DSP) mạnh.</li>
+</ul>
+
+<h3>2.2. Phân loại</h3>
+<ul>
+  <li><strong>SAR (Synthetic Aperture Radar)</strong>: Lắp trên máy bay, vệ tinh, dựa vào chuyển động nền tảng (platform) 
+    để “mở rộng khẩu độ ảo” trong quá trình thu dữ liệu.</li>
+  <li><strong>ISAR (Inverse SAR)</strong>: Dùng cho mục tiêu chuyển động (ví dụ tàu, máy bay). 
+    Thay vì radar di chuyển, mục tiêu tự di chuyển và quay, tạo hiệu ứng Doppler “khẩu độ ảo” để thu dữ liệu đa góc.</li>
+</ul>
+
+<hr/>
+
+<h2>3. SAR (Synthetic Aperture Radar)</h2>
+
+<h3>3.1. Nguyên lý hoạt động</h3>
+<p>
+  <strong>SAR</strong> sử dụng chuyển động của máy bay (hoặc vệ tinh) theo một quỹ đạo. 
+  Radar sẽ phát nhiều xung dọc theo đường bay và thu các phản xạ. 
+  Sau đó, bằng kỹ thuật xử lý <em>tương quan</em> (correlation), hệ thống “tổng hợp” các đo lường ở nhiều vị trí khác nhau 
+  thành một <strong>khẩu độ ảo</strong> lớn hơn rất nhiều ăng-ten thật. 
+  Kết quả là ảnh radar có <em>độ phân giải cao</em> theo phương ngang (azimuth).
+</p>
+
+<h3>3.2. Các bước xử lý chính</h3>
+<ol>
+  <li><strong>Thu thập dữ liệu dọc đường bay</strong>: Radar phát xung liên tục, lưu lại “dải” (strip) dữ liệu theo cả phương dọc (dải quét) và phương ngang (chiều bay).</li>
+  <li><strong>Xử lý miền tần số (Range &amp; Azimuth Compression)</strong>: Tách dữ liệu theo khoảng cách (range) và phương azimuth, sau đó thực hiện <em>nén xung</em> (pulse compression) và <em>chồng chéo tương quan</em> để nâng cao độ phân giải.</li>
+  <li><strong>Hiệu chỉnh chuyển động (Motion Compensation)</strong>: Loại bỏ rung lắc của máy bay, sai số quỹ đạo, để tránh mờ ảnh.</li>
+  <li><strong>Ghép thành ảnh SAR</strong>: Tạo bức ảnh 2D, với trục ngang là azimuth (hướng bay), trục dọc là range (khoảng cách quét), giá trị điểm ảnh thể hiện cường độ phản xạ (hoặc pha).</li>
+</ol>
+
+<h3>3.3. Ứng dụng SAR</h3>
+<ul>
+  <li><strong>Viễn thám (Remote Sensing)</strong>: Quan sát địa hình, rừng, băng tuyết, biến động địa chất, nông nghiệp.</li>
+  <li><strong>Giám sát biên giới, hàng hải</strong>: Phát hiện tàu thuyền, ghi nhận các hoạt động buôn lậu hoặc xâm nhập, kể cả trong đêm hoặc thời tiết xấu.</li>
+  <li><strong>Thám hiểm vũ trụ</strong>: Vệ tinh SAR quỹ đạo quanh Trái Đất, hoặc trên các hành tinh (như Magellan ở sao Kim) để khảo sát bề mặt.</li>
+</ul>
+
+<hr/>
+
+<h2>4. ISAR (Inverse Synthetic Aperture Radar)</h2>
+
+<h3>4.1. Nguyên lý hoạt động</h3>
+<p>
+  <strong>ISAR</strong> được phát triển để <em>chụp ảnh mục tiêu di động</em> (tàu biển, máy bay). 
+  Thay vì radar di chuyển nhiều, chính sự quay hoặc di chuyển của mục tiêu (thay đổi góc phương vị liên tục) 
+  sẽ “tạo khẩu độ ảo” trong mắt radar. 
+</p>
+
+<h3>4.2. Quy trình xử lý</h3>
+<ol>
+  <li><strong>Thu thập chuỗi xung Doppler</strong>: Khi mục tiêu quay hoặc nghiêng, mỗi bộ phận phản xạ sẽ có vệt Doppler riêng.</li>
+  <li><strong>Phân tách phổ Doppler</strong>: Cô lập các thành phần Doppler khác nhau, ứng với các phần bề mặt mục tiêu.</li>
+  <li><strong>Chuyển đổi sang ảnh 2D</strong>: Tương tự SAR, dùng kỹ thuật biến đổi FFT 2D (trong cả “range” và “Doppler”) để xây dựng ảnh ISAR. 
+      Trục ngang là Doppler (liên quan đến góc quay), trục dọc là khoảng cách.</li>
+</ol>
+
+<h3>4.3. Ứng dụng ISAR</h3>
+<ul>
+  <li><strong>Nhận dạng mục tiêu trên biển</strong>: Tàu ngầm, tàu mặt nước; hỗ trợ phân loại (quân sự hay dân sự, loại tàu) dựa trên “chữ ký Doppler” đặc trưng.</li>
+  <li><strong>Theo dõi máy bay</strong>: ISAR trên radar mặt đất hoặc radar đặt trên tàu hải quân, cung cấp ảnh mục tiêu chi tiết để xác định loại máy bay, vũ khí mang theo.</li>
+  <li><strong>Phân tích cấu trúc và chuyển động</strong>: Dùng trong nghiên cứu chuyển động quay, rung động của các vật thể.</li>
+</ul>
+
+<hr/>
+
+<h2>5. Kỹ thuật xử lý ảnh radar</h2>
+
+<p>
+  Bài giảng 6 và các video còn đề cập đến <strong>các thuật toán xử lý ảnh radar</strong> nhằm nâng cao chất lượng, giảm nhiễu:
+</p>
+
+<ol>
+  <li><strong>Speckle Filtering</strong>: Ảnh radar thường bị “hạt nhiễu” (speckle), đòi hỏi kỹ thuật lọc giữ lại biên và chi tiết.<br/>
+    Ví dụ: Lee Filter, Frost Filter, Gamma Map, Wavelet-based Denoising…</li>
+  <li><strong>Image Registration &amp; Calibration</strong>: Ghép nhiều khung ảnh hoặc chuỗi SAR khác thời điểm để theo dõi thay đổi (Change Detection).</li>
+  <li><strong>AI &amp; Machine Learning</strong>: Nhận dạng đối tượng (xe cộ, tòa nhà, tàu bè) trong ảnh radar. 
+    Sử dụng CNN (Convolutional Neural Networks) để phân loại đối tượng.</li>
+</ol>
+
+<hr/>
+
+<h2>6. Thách thức và giải pháp</h2>
+
+<ul>
+  <li>
+    <strong>Chi phí hệ thống</strong>: 
+    SAR/ISAR cần ăng-ten, máy phát công suất lớn, thiết bị thu nhạy và bộ xử lý số (DSP) mạnh => chi phí cao.
+  </li>
+  <li>
+    <strong>Khối lượng tính toán lớn</strong>: 
+    Xử lý tín hiệu SAR/ISAR đòi hỏi FFT 2D/3D, áp dụng nhiều bước lọc, hiệu chỉnh. 
+    Giải pháp: Sử dụng GPU, FPGA hoặc siêu máy tính, hoặc các thuật toán tối ưu hóa.
+  </li>
+  <li>
+    <strong>Độ chính xác quỹ đạo</strong>: 
+    Với SAR vệ tinh, sai số quỹ đạo, rung động nhỏ cũng gây méo ảnh. 
+    Giải pháp: Bổ sung thiết bị dẫn đường quán tính (INS), GNSS chính xác cao (GPS vi phân).
+  </li>
+  <li>
+    <strong>Nhiễu, thời tiết cực đoan</strong>: 
+    Mưa lớn, bão, băng tuyết dày có thể làm suy hao sóng, giảm chất lượng. 
+    Giải pháp: Chọn băng tần phù hợp (L-Band, S-Band cho viễn thám xuyên mây dày), hoặc công suất phát cao hơn.
+  </li>
+</ul>
+
+<hr/>
+
+<h2>7. Ứng dụng thực tế và xu hướng</h2>
+
+<ul>
+  <li>
+    <strong>SAR vệ tinh quan sát Trái Đất</strong> (Earth Observation): 
+    Sentinel-1 (ESA), RADARSAT (Canada), TerraSAR-X (Đức)… 
+    thu thập ảnh cập nhật liên tục để giám sát môi trường, thời tiết, thiên tai.
+  </li>
+  <li>
+    <strong>ISAR phòng không, hải quân</strong>: 
+    Radar đặt trên tàu chiến, bờ biển, hoặc trạm cảnh giới, cung cấp ảnh chi tiết nhận dạng mục tiêu xa.
+  </li>
+  <li>
+    <strong>Ứng dụng UAV</strong>: 
+    Các UAV cỡ nhỏ mang radar SAR tầm ngắn, giám sát khu vực nguy hiểm, tác chiến phi truyền thống.
+  </li>
+  <li>
+    <strong>Tích hợp AI</strong>: 
+    Tự động phân loại đối tượng trong ảnh radar, theo dõi biến đổi bề mặt (môi trường, nông nghiệp chính xác).
+  </li>
+</ul>
+
+<p>
+  Xu hướng chung: <em>mở rộng băng thông, tăng dải tần, dùng mảng pha AESA</em> để linh hoạt quét, 
+  đồng thời tận dụng <em>ML/AI</em> nhằm rút ngắn thời gian xử lý ảnh, 
+  tự động phân tích dữ liệu lớn (Big Data) trong các dự án quan sát hành tinh.
+</p>
+
+<hr/>
+
+<h2>8. Kết luận</h2>
+
+<p>
+  <strong>Bài giảng 6</strong> cung cấp bức tranh tổng thể về <em>SAR</em> và <em>ISAR</em> – 
+  hai kỹ thuật chủ đạo trong <strong>Radar chụp ảnh độ phân giải cao</strong>.  
+  Những điểm cốt lõi gồm:
+</p>
+
+<ul>
+  <li><strong>Nguyên lý “khẩu độ ảo”</strong> trong SAR (do chuyển động radar) và ISAR (do chuyển động mục tiêu).</li>
+  <li><strong>Các bước xử lý dữ liệu SAR/ISAR</strong>: Nén xung, hiệu chỉnh chuyển động, FFT 2D, ghép thành ảnh.</li>
+  <li><strong>Kỹ thuật xử lý ảnh radar</strong>: Lọc speckle, hiệu chỉnh ảnh, sử dụng AI để phân tích vật thể.</li>
+  <li><strong>Thách thức thực tế</strong>: Chi phí, khối lượng tính toán, yêu cầu độ chính xác quỹ đạo và điều kiện thời tiết.</li>
+  <li><strong>Ứng dụng rộng rãi</strong>: Viễn thám, quân sự, hàng hải, giám sát môi trường, an ninh, nghiên cứu vũ trụ.</li>
+</ul>
+
+<p>
+  Với sự phát triển của <em>công nghệ tính toán</em>, <em>xử lý tín hiệu</em> và <em>AI</em>, 
+  radar SAR/ISAR hứa hẹn tiếp tục cải thiện độ phân giải, tính linh hoạt, mở ra nhiều triển vọng cho 
+  <strong>quan sát Trái Đất, nhận dạng mục tiêu</strong> và <strong>phòng thủ an ninh</strong>.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>

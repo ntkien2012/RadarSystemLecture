@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 3)</h1>
+
+<p class="note">
+  Nội dung được tổng hợp từ hai video tham khảo: <br/>
+  <a href="https://www.youtube.com/watch?v=Ur3eV9gF4Wg" target="_blank">Video 1</a> và 
+  <a href="https://www.youtube.com/watch?v=G824xEyDYCs" target="_blank">Video 2</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu và mục tiêu bài giảng</h2>
+
+<p>
+  Trong <strong>Bài giảng 3</strong>, chúng ta đi sâu vào những khía cạnh quan trọng của radar liên quan đến:
+</p>
+
+<ol>
+  <li><strong>Các mô hình phản xạ mục tiêu (Target Scattering Models)</strong>: Phân tích cách mục tiêu phản xạ và tán xạ sóng radar.</li>
+  <li><strong>Nhiễu nền và kỹ thuật nâng cao để tách nhiễu (Clutter &amp; Advanced Suppression)</strong>.</li>
+  <li><strong>Quy trình theo dõi mục tiêu (Target Tracking)</strong>: Giới thiệu các thuật toán lọc Kalman, bộ lọc đa mục tiêu (Multi-target Tracking).</li>
+  <li><strong>Hệ số chất lượng radar (Radar Performance Metrics)</strong>: Xác suất phát hiện, xác suất báo động giả, v.v.</li>
+</ol>
+
+<p>
+  Dưới đây là phần tổng hợp các ý chính từ hai video, làm rõ thêm những nội dung đã được trình bày trong bài giảng.
+</p>
+
+<hr/>
+
+<h2>2. Mô hình phản xạ radar của mục tiêu (Target Scattering Models)</h2>
+
+<h3>2.1. Định nghĩa Radar Cross Section (RCS)</h3>
+<p>
+  <strong>RCS (Radar Cross Section)</strong> là đại lượng quan trọng thể hiện "mức độ phản xạ sóng radar" của mục tiêu.
+  Nó phụ thuộc nhiều yếu tố:
+</p>
+<ul>
+  <li>Hình học và kích thước mục tiêu</li>
+  <li>Vật liệu bề mặt (kim loại, composite, sơn hấp thụ sóng radar…)</li>
+  <li>Góc tới và góc phản xạ, độ phân cực sóng radar</li>
+  <li>Các cấu trúc gờ, cạnh, hốc có thể gây hiệu ứng cộng hưởng</li>
+</ul>
+
+<h3>2.2. Các mô hình RCS</h3>
+<p>
+  Một số mô hình tiêu biểu được đề cập (ví dụ <em>Swerling Models</em>), 
+  thường chia theo sự biến thiên của RCS trong thời gian hoặc theo góc tới:
+</p>
+<ul>
+  <li><strong>Swerling 1 &amp; 2</strong>: Mô hình mục tiêu đơn lẻ (máy bay, UAV) với phân bố RCS thay đổi ngẫu nhiên.</li>
+  <li><strong>Swerling 3 &amp; 4</strong>: Mô hình mục tiêu gồm nhiều tán xạ phần tử, RCS có thể dao động lớn trong từng xung radar.</li>
+  <li><strong>Swerling 5 (hoặc trường hợp nâng cao)</strong>: Dành cho mục tiêu phức tạp, thay đổi RCS mạnh về thời gian và góc quét.</li>
+</ul>
+
+<p>
+  Theo <em>Video 1</em>, những mô hình này giúp radar “dự đoán” độ mạnh (hoặc yếu) của tín hiệu phản xạ ở các tình huống thực tế khác nhau 
+  (mục tiêu nhỏ, mục tiêu tàng hình, mục tiêu quay nhanh…).
+</p>
+
+<hr/>
+
+<h2>3. Nhiễu nền (Clutter) và cách khử nhiễu nâng cao</h2>
+
+<h3>3.1. Các loại nhiễu nền</h3>
+<p>
+  Nhiễu nền (hay <em>clutter</em>) thường đến từ:
+</p>
+<ul>
+  <li><strong>Mặt đất</strong> (Land clutter): Rừng, nhà cửa, đồi núi có phản xạ rất mạnh.</li>
+  <li><strong>Mặt nước</strong> (Sea clutter): Sóng biển, bọt biển gây nhiễu động.</li>
+  <li><strong>Khí tượng</strong> (Weather clutter): Mưa, mây, tuyết, mưa đá.</li>
+  <li><strong>Động vật bay</strong> (Bird clutter) hay côn trùng, gây "nhiễu sinh học".</li>
+</ul>
+
+<h3>3.2. Phương pháp loại nhiễu</h3>
+<ul>
+  <li><strong>MTI (Moving Target Indicator)</strong>: Dựa vào Doppler để bỏ qua mục tiêu tĩnh hoặc chuyển động chậm.  
+    <em>Video 2</em> đặc biệt nhấn mạnh tầm quan trọng của MTI trong việc phát hiện mục tiêu bay tốc độ cao.</li>
+  <li><strong>Doppler Filter</strong>: Lọc nhiễu nền có tần số Doppler thấp, giữ lại tần số Doppler cao (mục tiêu chuyển động nhanh).</li>
+  <li><strong>Adaptive Clutter Suppression</strong>: Xử lý thích nghi trên không gian – thời gian (STAP), điều khiển pha ăng-ten mảng để "bóp" (nul) hướng có clutter mạnh.</li>
+  <li><strong>Polarization Diversity</strong>: Sử dụng đa phân cực (horizontal, vertical, circular) để phân biệt mục tiêu và môi trường.</li>
+</ul>
+
+<hr/>
+
+<h2>4. Quy trình theo dõi mục tiêu (Target Tracking)</h2>
+
+<h3>4.1. Khái quát</h3>
+<p>
+  Sau khi radar phát hiện mục tiêu, việc <strong>theo dõi (tracking)</strong> liên tục quỹ đạo là rất quan trọng. 
+  Điều này đòi hỏi radar cập nhật vị trí, vận tốc và đôi khi cả độ cao (nếu là radar 3D) của mục tiêu theo thời gian.
+</p>
+
+<h3>4.2. Các thuật toán theo dõi</h3>
+<ul>
+  <li>
+    <strong>Track-While-Scan (TWS)</strong>: 
+    Radar vừa quét không gian, vừa cập nhật “track” nhiều mục tiêu. 
+    Thường dùng <em>nhiều chu kỳ quét</em> để ước lượng quỹ đạo, vận tốc mục tiêu.
+  </li>
+  <li>
+    <strong>Bộ lọc Kalman (Kalman Filter)</strong>:
+    <ul>
+      <li>Dự đoán vị trí mục tiêu dựa trên mô hình động học (tốc độ, gia tốc).</li>
+      <li>Cập nhật bằng dữ liệu đo mới từ radar, giảm nhiễu và sai số.</li>
+    </ul>
+  </li>
+  <li>
+    <strong>Alpha-Beta-Gamma Filter</strong>: Đơn giản hơn Kalman, hiệu quả trong thực tế với <em>ít tham số tính toán</em>, 
+    thường dùng khi mô hình chuyển động mục tiêu không quá phức tạp.
+  </li>
+  <li>
+    <strong>Multi-Target Tracking</strong>: Khi có nhiều mục tiêu, cần gán đo lường (tín hiệu radar) vào từng mục tiêu đúng (data association), 
+    ví dụ <em>Joint Probabilistic Data Association (JPDA)</em>, <em>MHT (Multiple Hypothesis Tracking)</em>.
+  </li>
+</ul>
+
+<hr/>
+
+<h2>5. Đánh giá hiệu năng và các chỉ số đo lường</h2>
+
+<h3>5.1. Xác suất phát hiện (Pd) và xác suất báo động giả (Pfa)</h3>
+<p>
+  <strong>Pd (Probability of Detection)</strong> là xác suất mà radar phát hiện chính xác mục tiêu (khi mục tiêu thực sự tồn tại). 
+  <br/>
+  <strong>Pfa (Probability of False Alarm)</strong> là xác suất báo động giả (tín hiệu nhiễu bị hiểu nhầm là mục tiêu).
+</p>
+
+<h3>5.2. ROC (Receiver Operating Characteristic)</h3>
+<p>
+  Đường ROC biểu diễn mối quan hệ giữa <code>Pd</code> và <code>Pfa</code>. 
+  Điều chỉnh ngưỡng phát hiện (Threshold) ảnh hưởng trực tiếp đến hai giá trị này:
+</p>
+<ul>
+  <li>Ngưỡng thấp => <code>Pd</code> cao, nhưng <code>Pfa</code> cũng cao.</li>
+  <li>Ngưỡng cao => <code>Pd</code> thấp, <code>Pfa</code> thấp.</li>
+</ul>
+
+<h3>5.3. Tầm phát hiện (Detection Range) và Độ chính xác (Accuracy)</h3>
+<p>
+  Đánh giá radar còn dựa trên:
+</p>
+<ul>
+  <li><strong>Tầm phát hiện cực đại</strong>: Vị trí xa nhất vẫn có thể phát hiện mục tiêu với <em>Pd</em> mong muốn.</li>
+  <li><strong>Độ chính xác</strong>: Sai số đo khoảng cách, góc phương vị, độ cao, vận tốc.</li>
+</ul>
+
+<h3>5.4. Các chỉ số khác</h3>
+<ul>
+  <li><strong>Probability of Track (P<sub>track</sub>)</strong>: Xác suất duy trì track liên tục mục tiêu không bị mất.</li>
+  <li><strong>Thời gian phản ứng (Response Time)</strong>: Tốc độ radar cập nhật thông tin mục tiêu.</li>
+  <li><strong>Độ tin cậy (Reliability)</strong>: Khả năng hoạt động liên tục không lỗi, ảnh hưởng bởi thiết kế phần cứng &amp; phần mềm.</li>
+</ul>
+
+<hr/>
+
+<h2>6. Ứng dụng của các kỹ thuật nâng cao</h2>
+
+<p>
+  Từ nội dung bài giảng 3 và hai video tham khảo, chúng ta thấy các kỹ thuật như mô hình mục tiêu, 
+  khử nhiễu nâng cao, thuật toán tracking... đã được ứng dụng rộng rãi:
+</p>
+
+<ul>
+  <li><strong>Quân sự</strong>: Hệ thống radar phòng không tầm xa sử dụng STAP để phát hiện máy bay tàng hình bay sát địa hình.</li>
+  <li><strong>Hàng không – hàng hải</strong>: Radar giám sát bờ biển, radar ATC (Air Traffic Control) theo dõi nhiều mục tiêu đồng thời.</li>
+  <li><strong>Ứng dụng dân dụng</strong>: Radar ô tô (phân biệt xe cộ, người đi bộ, vật cản) để kích hoạt phanh khẩn cấp hoặc cảnh báo sớm.</li>
+  <li><strong>Khí tượng</strong>: Radar thời tiết Doppler sử dụng mô hình tán xạ để phân loại mưa, tuyết, tính cường độ mưa.</li>
+  <li><strong>Công nghiệp &amp; an ninh</strong>: Hệ thống radar giám sát vùng biên, sân bay, khu công nghiệp – với khả năng lọc địa hình phức tạp.</li>
+</ul>
+
+<hr/>
+
+<h2>7. Kết luận</h2>
+
+<p>
+  <strong>Bài giảng 3</strong> đã đưa ra những kiến thức mở rộng, giúp chúng ta hiểu rõ hơn về:
+</p>
+<ul>
+  <li><em>RCS và mô hình phản xạ mục tiêu</em> (Swerling Models), cho phép mô phỏng chính xác hơn tương tác sóng radar – mục tiêu.</li>
+  <li><em>Nhiễu nền (clutter) và kỹ thuật nâng cao</em> như MTI, Doppler Filter, STAP, Polarization Diversity.</li>
+  <li><em>Quy trình theo dõi mục tiêu</em> (Target Tracking) bao gồm TWS, bộ lọc Kalman, Alpha-Beta-Gamma, 
+      kỹ thuật đa mục tiêu (JPDA, MHT…)</li>
+  <li><em>Đánh giá hiệu năng radar</em>: Xác suất phát hiện (Pd), xác suất báo động giả (Pfa), ROC, 
+      tầm phát hiện, độ chính xác, tính ổn định…</li>
+</ul>
+
+<p>
+  Việc nắm vững các kỹ thuật xử lý nâng cao và mô hình mục tiêu giúp người thiết kế radar 
+  nâng cao hiệu suất và độ tin cậy trong mọi ứng dụng, từ quốc phòng đến dân sự, từ 
+  khí tượng đến thám hiểm vũ trụ.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>

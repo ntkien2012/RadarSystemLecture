@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 4</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 4)</h1>
+
+<p class="note">
+  Nội dung tổng hợp dựa trên các video tham khảo:  
+  <a href="https://www.youtube.com/watch?v=a53Cg3KUTt4" target="_blank">Video 1</a>,  
+  <a href="https://www.youtube.com/watch?v=YvLPdtExJ0k" target="_blank">Video 2</a>,  
+  <a href="https://www.youtube.com/watch?v=FmW4u_AU4H4" target="_blank">Video 3</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu chung</h2>
+
+<p>
+  Trong <strong>Bài giảng 4</strong>, chúng ta tập trung vào những chủ đề chuyên sâu hơn của công nghệ radar:
+</p>
+
+<ol>
+  <li><strong>Radar mảng pha (Phased Array Radar)</strong> và nguyên lý quét điện tử (Electronic Scanning).</li>
+  <li><strong>Các kỹ thuật pulse compression (Nén xung)</strong>, xử lý sóng Chirp.</li>
+  <li><strong>Hệ thống radar đa kênh, đa tần số</strong> (Multi-channel, Multi-frequency) và ưu điểm.</li>
+  <li><strong>Giới thiệu công nghệ AESA (Active Electronically Scanned Array)</strong> và các ứng dụng.</li>
+</ol>
+
+<hr/>
+
+<h2>2. Radar mảng pha (Phased Array Radar) và Quét điện tử (Electronic Scanning)</h2>
+
+<h3>2.1. Nguyên lý hoạt động</h3>
+<p>
+  <strong>Radar mảng pha</strong> (Phased Array Radar) gồm nhiều phần tử ăng-ten được sắp xếp theo cấu hình (thường là mảng 2D). 
+  Mỗi phần tử có thể điều chỉnh pha (và biên độ) tín hiệu phát – thu, từ đó tạo ra búp sóng định hướng theo hướng mong muốn.  
+</p>
+
+<h3>2.2. Quét điện tử (Electronic Scanning)</h3>
+<p>
+  Thay vì xoay cơ khí ăng-ten parabol, radar mảng pha có thể thay đổi hướng búp sóng thông qua việc 
+  <em>tinh chỉnh pha</em> của từng phần tử một cách nhanh chóng:
+</p>
+<ul>
+  <li><strong>Beam Steering:</strong> Chuyển hướng búp sóng theo phương vị và góc tà (elevation) trong vài mili-giây.</li>
+  <li><strong>Không có cơ cấu quay lớn,</strong> nên tốc độ “quét” không gian rất nhanh và mượt (có thể quét nhiều khu vực khác nhau luân phiên).</li>
+  <li><strong>Low Probability of Intercept (LPI):</strong> Điều chỉnh tần số, thời gian phát linh hoạt, giảm khả năng bị đối phương bắt tín hiệu.</li>
+</ul>
+
+<p>
+  <em>Video 1</em> (<a href="https://www.youtube.com/watch?v=a53Cg3KUTt4" target="_blank">Link</a>) minh họa cách một radar mảng pha 
+  có thể quét liên tục “bầu trời” mà không cần xoay ăng-ten bằng cơ khí, đồng thời theo dõi nhiều mục tiêu cùng lúc.
+</p>
+
+<hr/>
+
+<h2>3. Kỹ thuật Pulse Compression (Nén xung) và Xử lý sóng Chirp</h2>
+
+<h3>3.1. Lý do cần nén xung</h3>
+<p>
+  Ở radar xung truyền thống, muốn tăng tầm phát hiện, cần xung có <strong>năng lượng cao</strong>, 
+  dẫn đến <strong>xung dài</strong>. Nhưng xung dài làm <strong>giảm độ phân giải</strong> về cự ly.  
+  <br/>
+  <strong>Nén xung (Pulse Compression)</strong> giúp kết hợp “công suất trung bình cao” và “độ phân giải tốt” trong một dạng sóng.
+</p>
+
+<h3>3.2. Nguyên lý nén xung</h3>
+<ul>
+  <li><strong>Chirp (Linear Frequency Modulation - LFM):</strong> Xung dài vài micro-giây (hoặc mili-giây) 
+      với tần số thay đổi tuyến tính (từ thấp lên cao hoặc ngược lại).</li>
+  <li>Sau khi thu, radar thực hiện <em>tương quan chéo</em> (cross-correlation) với bản sao (reference) của sóng chirp 
+      để thu được một <em>xung “hẹp”</em> có biên độ cao, chính là quá trình <strong>nén xung</strong>.</li>
+  <li><strong>Độ phân giải cự ly</strong> khi sử dụng chirp phụ thuộc vào băng thông quét tần số (Sweep Bandwidth). 
+      Băng thông càng lớn => độ phân giải càng tốt.</li>
+</ul>
+
+<p>
+  <em>Video 2</em> (<a href="https://www.youtube.com/watch?v=YvLPdtExJ0k" target="_blank">Link</a>) giải thích chi tiết 
+  cách một radar chirp LFM cho phép “vừa nhìn xa” (do xung dài => năng lượng cao) “vừa nhìn rõ” (do nén xung => xung hẹp hơn).
+</p>
+
+<hr/>
+
+<h2>4. Radar đa kênh, đa tần số (Multi-channel, Multi-frequency Radar)</h2>
+
+<h3>4.1. Lợi ích của đa kênh</h3>
+<p>
+  <strong>Radar đa kênh</strong> sử dụng nhiều kênh thu – phát song song (hoặc nhiều búp sóng đồng thời trong radar mảng pha).  
+  Ưu điểm:
+</p>
+<ul>
+  <li><strong>Tăng tốc độ xử lý</strong>: Mỗi kênh thu nhận dữ liệu riêng, có thể xử lý đồng thời.</li>
+  <li><strong>Cải thiện năng lực theo dõi</strong>: Theo dõi nhiều mục tiêu khác nhau hoặc nhiều góc phương vị / độ cao.</li>
+  <li><strong>Giảm nhiễu chéo</strong>: Có thể chia kênh để phát ở tần số khác nhau, giảm xung đột.</li>
+</ul>
+
+<h3>4.2. Radar đa tần số</h3>
+<ul>
+  <li><strong>Ghép tần số thấp – cao</strong>: Tần số thấp (VHF, UHF) phát hiện mục tiêu tàng hình (stealth) tốt hơn, 
+      tần số cao (X, Ku) có độ phân giải góc và cự ly cao.</li>
+  <li><strong>Khả năng kết hợp dữ liệu</strong>: Xử lý hợp nhất (data fusion) cho ra thông tin chính xác, giảm sai số và tỷ lệ báo giả.</li>
+  <li><strong>Tăng khả năng chống gây nhiễu (ECCM)</strong>: Nhiều băng tần => đối phương khó gây nhiễu đồng thời trên toàn phổ.</li>
+</ul>
+
+<p>
+  Theo <em>Video 3</em> (<a href="https://www.youtube.com/watch?v=FmW4u_AU4H4" target="_blank">Link</a>), 
+  các hệ thống radar hiện đại có thể <em>“cấu hình linh hoạt”</em> tần số tùy theo nhiệm vụ (giám sát hay theo dõi mục tiêu), 
+  môi trường (địa hình, thời tiết), và yêu cầu chống nhiễu.
+</p>
+
+<hr/>
+
+<h2>5. Giới thiệu công nghệ AESA (Active Electronically Scanned Array)</h2>
+
+<h3>5.1. Định nghĩa AESA</h3>
+<p>
+  <strong>AESA (Active Electronically Scanned Array)</strong> là dạng radar mảng pha chủ động, 
+  trong đó <em>mỗi phần tử ăng-ten</em> đều có <em>bộ phát – thu (TR Module) độc lập</em>.  
+  Điều này khác với PESA (Passive Electronically Scanned Array), nơi chỉ có một bộ phát công suất lớn ở phía sau 
+  và các phần tử thực hiện điều khiển pha thụ động.
+</p>
+
+<h3>5.2. Ưu điểm của AESA</h3>
+<ul>
+  <li><strong>Tăng độ tin cậy</strong>: Hỏng một vài phần tử không làm mất hoàn toàn chức năng radar.</li>
+  <li><strong>Khả năng quét đa búp</strong>: Có thể phát và thu nhiều búp sóng độc lập, theo dõi hàng chục mục tiêu đồng thời.</li>
+  <li><strong>Hiệu suất và công suất cao</strong>: Các TR Module có thể dùng công nghệ bán dẫn (GaN, GaAs) cho phép công suất lớn, ít tỏa nhiệt.</li>
+  <li><strong>Linh hoạt tần số</strong>: Radar AESA có thể nhảy tần nhanh, giảm nguy cơ bị gây nhiễu hoặc bị phát hiện.</li>
+</ul>
+
+<p>
+  Nhiều hệ thống radar quân sự tiên tiến (trên máy bay chiến đấu, tàu khu trục hải quân, tên lửa phòng không hiện đại) 
+  đều đang chuyển sang sử dụng AESA để nâng cao khả năng giám sát, theo dõi và chống nhiễu.
+</p>
+
+<hr/>
+
+<h2>6. Ứng dụng và xu hướng phát triển</h2>
+
+<ul>
+  <li><strong>Phòng không – phòng thủ tên lửa</strong>: Radar mảng pha AESA tầm xa theo dõi tên lửa đạn đạo, định vị quỹ đạo bay.</li>
+  <li><strong>Kiểm soát không lưu (ATC)</strong>: Mảng pha quét nhanh, khả năng quét vùng rộng với độ chính xác cao.</li>
+  <li><strong>Radar trên máy bay (Airborne Radar)</strong>: AESA trên tiêm kích, máy bay cảnh báo sớm (AWACS) giúp quét bầu trời 360°, phát hiện mục tiêu bay ở khoảng cách lớn.</li>
+  <li><strong>Giao thông và tự động hóa</strong>: Radar băng tần cao (79 GHz) trong ô tô, hỗ trợ lái xe an toàn, cảnh báo sớm va chạm.</li>
+  <li><strong>Radar dân dụng đa chức năng</strong>: Tích hợp nén xung, chirp, mảng pha để đo thời tiết, kiểm tra tàu thuyền, quản lý luồng giao thông hàng hải…</li>
+</ul>
+
+<p>
+  Xu hướng chung là radar có tính <em>“modular”</em> cao, dễ mở rộng, kết hợp <strong>AI, Machine Learning</strong> 
+  để tự động nhận dạng mục tiêu phức tạp, tăng cường tính năng <strong>phân tích phổ</strong> và 
+  <strong>truy xuất dữ liệu thời gian thực</strong> qua mạng.
+</p>
+
+<hr/>
+
+<h2>7. Kết luận</h2>
+
+<p>
+  <strong>Bài giảng 4</strong> đã giới thiệu những nội dung quan trọng và nâng cao:
+</p>
+<ul>
+  <li><strong>Radar mảng pha (Phased Array)</strong>: Quét điện tử nhanh, không cần quay cơ khí.</li>
+  <li><strong>Kỹ thuật nén xung (Pulse Compression)</strong>: Sử dụng chirp (LFM) để nâng cao độ phân giải mà vẫn giữ năng lượng xung.</li>
+  <li><strong>Hệ thống đa kênh, đa tần số</strong>: Tối ưu hóa khả năng phát hiện, theo dõi trong nhiều tình huống, giảm nhiễu.</li>
+  <li><strong>AESA (Active Electronically Scanned Array)</strong>: Mảng pha chủ động với các TR Module độc lập, linh hoạt, bền bỉ.</li>
+  <li><strong>Ứng dụng và xu hướng</strong>: Tích hợp AI, mở rộng băng tần, nâng cao chống nhiễu, phát triển radar gọn nhẹ cho nhiều nền tảng (máy bay, tàu, xe hơi, UAV...).</li>
+</ul>
+
+<p>
+  Với sự tiến bộ của <strong>công nghệ bán dẫn</strong> (GaN, GaAs), <strong>xử lý tín hiệu số</strong>, và 
+  <strong>mạch tích hợp cao</strong>, radar mảng pha (nhất là AESA) đang trở thành xu hướng chủ đạo 
+  trong cả lĩnh vực quân sự lẫn dân sự.  
+  Tính linh hoạt, độ tin cậy và hiệu năng cao khiến nó trở thành “xương sống” cho các hệ thống phòng thủ, 
+  kiểm soát không lưu và giám sát hiện đại.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>

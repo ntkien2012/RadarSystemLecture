@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 2)</h1>
+
+<p class="note">Dựa trên nội dung tham khảo từ các video sau: 
+  <a href="https://www.youtube.com/watch?v=85AvztY3Qco" target="_blank">Link 1</a>, 
+  <a href="https://www.youtube.com/watch?v=P__YYv6J0qI" target="_blank">Link 2</a>, 
+  <a href="https://www.youtube.com/watch?v=JZj0zvHiNxs" target="_blank">Link 3</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu về Radar Xung Doppler &amp; Các Hệ Thống Liên Quan</h2>
+
+<p>
+  Ở bài giảng thứ hai, chúng ta tập trung vào các chủ đề nâng cao của công nghệ radar, cụ thể là 
+  <strong>Radar xung Doppler (Pulse Doppler Radar)</strong>, các dạng <em>radar sóng liên tục điều chế tần số</em> (FMCW – 
+  Frequency Modulated Continuous Wave), và khái niệm <strong>đánh giá mức hiệu năng</strong> của hệ thống radar.
+</p>
+
+<ul>
+  <li><strong>Radar xung Doppler:</strong> Kết hợp chế độ phát xung và khai thác hiệu ứng Doppler để đo vận tốc chính xác. 
+    <ul>
+      <li>Tách nhiễu nền tĩnh bằng lọc Doppler, phát hiện mục tiêu di động ngay cả trong môi trường nhiều clutter (mưa, sóng biển, chướng ngại vật).</li>
+      <li>Hạn chế: Cần mạch xử lý phức tạp, đồng bộ thời gian và tần số chặt chẽ.</li>
+    </ul>
+  </li>
+  <li><strong>Radar FMCW (Continuous Wave có điều tần):</strong>
+    <ul>
+      <li>Phát sóng liên tục với tần số quét (chirp) tăng hoặc giảm theo thời gian, xác định khoảng cách dựa trên độ lệch tần số giữa sóng phát và sóng thu.</li>
+      <li>Ưu điểm: Thu và phát sóng liên tục, <em>không tồn tại “điểm chết”</em> do chuyển mạch phát-thu (như radar xung). Độ phân giải rất tốt với băng thông rộng.</li>
+      <li>Nhược điểm: Dễ bị can nhiễu nếu làm việc ở dải tần đông đúc, yêu cầu phần cứng xử lý tần số cao.</li>
+    </ul>
+  </li>
+  <li><strong>Phân tích hiệu năng radar:</strong> Xem xét công suất phát, độ lợi ăng-ten, hệ số tạp âm, diện tích phản xạ RCS để dự đoán tầm hoạt động và xác suất phát hiện.</li>
+</ul>
+
+<hr/>
+
+<h2>2. Các Phương Pháp Xử Lý Tín Hiệu Cao Cấp</h2>
+
+<p>
+  Từ nội dung ở <em>Lecture 2</em>, các kỹ thuật xử lý tín hiệu radar được đề cập chi tiết hơn, 
+  đặc biệt trong bối cảnh radar xung Doppler và radar sóng liên tục:
+</p>
+
+<ol>
+  <li>
+    <strong>Bộ lọc Doppler và MTI (Moving Target Indicator):</strong><br/>
+    Sử dụng các mạch lọc số (Digital Filter) hoặc bộ lọc thích nghi (Adaptive Filter) để loại bỏ clutter tĩnh (mặt đất, địa hình). 
+    Mục tiêu chuyển động tạo ra thành phần Doppler lệch so với nhiễu tĩnh, nhờ đó <em>MTI</em> có thể tách bạch rõ ràng hơn.
+  </li>
+  <li>
+    <strong>Transform miền tần số – FFT (Fast Fourier Transform):</strong><br/>
+    Trong radar Doppler, tín hiệu thu theo thời gian được biến đổi sang miền tần số để xác định vận tốc mục tiêu (dải Doppler). 
+    <em>Nhiều hệ thống radar</em> có thể thực hiện FFT 2D (dọc theo trục thời gian và trục xung) cho phép xác định đồng thời cả khoảng cách – vận tốc.
+  </li>
+  <li>
+    <strong>CFAR (Constant False Alarm Rate):</strong><br/>
+    Thiết lập ngưỡng phát hiện tự động thích nghi với độ nhiễu nền thay đổi, giữ mức <em>xác suất báo động giả</em> (False Alarm) ổn định. 
+    Có thể có nhiều biến thể: Cell-Averaging CFAR, Greatest Of CFAR, Order Statistic CFAR…
+  </li>
+  <li>
+    <strong>Ghép kênh không gian – thời gian (STAP: Space-Time Adaptive Processing):</strong><br/>
+    Với radar mảng pha, STAP cho phép xử lý đồng thời theo không gian (pha của từng phần tử ăng-ten) 
+    và theo thời gian (mạch Doppler) để nâng cao khả năng phân biệt mục tiêu trong môi trường lẫn nhiễu phức tạp.
+  </li>
+</ol>
+
+<hr/>
+
+<h2>3. Tín Hiệu Radar Và Các Dạng Sóng (Waveform)</h2>
+
+<p>
+  Nội dung tiếp theo đề cập đến tầm quan trọng của <strong>dạng sóng (waveform design)</strong> trong radar. 
+  Mỗi dạng sóng khác nhau tối ưu cho mục đích riêng (đo vận tốc, đo vị trí chính xác, giảm thiểu nhiễu...).
+</p>
+
+<ul>
+  <li><strong>Chuỗi xung (Pulse Train):</strong> Phổ biến trong radar xung Doppler, cân bằng giữa độ phân giải và khoảng thời gian lặp xung (PRT).</li>
+  <li><strong>Chirp Linear (LFM – Linear Frequency Modulation):</strong> Hay dùng trong radar FMCW, cung cấp băng thông ảo lớn, tăng độ phân giải cự ly và chống nhiễu.</li>
+  <li><strong>Phase-coded Waveforms:</strong> Sử dụng mã (Code) nhúng trong pha xung, cho phép kỹ thuật nén xung (Pulse Compression) để tăng tầm quét mà không mất độ phân giải.</li>
+  <li><strong>Non-linear FM, polyphase codes:</strong> Dạng sóng nâng cao giúp giảm “dải động” bên cạnh (Side-lobe) và tăng khả năng chống gây nhiễu.</li>
+</ul>
+
+<hr/>
+
+<h2>4. Ứng Dụng Và Triển Vọng Radar Xung Doppler, FMCW</h2>
+
+<p>
+  Từ các chủ đề nêu trong video (Lecture 2), <strong>Pulse Doppler Radar</strong> và <strong>FMCW Radar</strong> 
+  đang giữ vai trò rất quan trọng trong nhiều lĩnh vực:
+</p>
+
+<ol>
+  <li><strong>Quân sự:</strong> Phát hiện máy bay, tên lửa, tàu chiến trong môi trường khắc nghiệt. 
+    Radar xung Doppler hiện diện trong hệ thống phòng không, cảnh giới, dẫn đường hỏa lực.</li>
+  <li><strong>Hàng không – Hàng hải:</strong> Kiểm soát không lưu, chống va chạm tàu biển nhờ radar tầm xa có xử lý Doppler để theo dõi mục tiêu di chuyển.</li>
+  <li><strong>Giao thông:</strong> FMCW Radar dùng đo tốc độ xe, radar ô tô (77 GHz, 79 GHz) hỗ trợ lái tự động, nhận diện vật cản nhanh chóng.</li>
+  <li><strong>Công nghiệp:</strong> Đo mức chất lỏng, kiểm tra vận tốc dòng chảy trong hệ thống ống dẫn dùng radar sóng liên tục.</li>
+  <li><strong>Khí tượng:</strong> Radar thời tiết (Doppler Weather Radar) theo dõi vận tốc gió, mưa, bão, hỗ trợ dự báo chính xác.</li>
+</ol>
+
+<hr/>
+
+<h2>5. Thách Thức Và Hướng Phát Triển</h2>
+
+<p>
+  Giống như bài giảng đầu tiên, Radar Xung Doppler và FMCW Radar cũng đối mặt với nhiều thách thức về 
+  <em>chống nhiễu</em>, <em>tàng hình</em>, <em>tích hợp AI</em>. Ở <em>Lecture 2</em>, một số xu hướng phát triển được nhấn mạnh:
+</p>
+
+<ul>
+  <li><strong>Xử lý tín hiệu nâng cao (AI, Machine Learning):</strong> Dự đoán quỹ đạo mục tiêu chính xác hơn, nhận dạng tín hiệu radar tàng hình.</li>
+  <li><strong>Công nghệ mảng pha chủ động (AESA) + Doppler:</strong> Ghép Doppler, quét điện tử, nhiều kênh thu để cải thiện độ phân giải góc, phát hiện mục tiêu nhỏ.</li>
+  <li><strong>Giảm thiểu side-lobe:</strong> Các kỹ thuật điều khiển búp sóng, lọc side-lobe, thiết kế mã sóng.</li>
+  <li><strong>Tối ưu hóa tính gọn nhẹ, tiết kiệm năng lượng:</strong> Radar thế hệ mới cho UAV, phương tiện tự hành, thiết bị cầm tay (portable radar).</li>
+</ul>
+
+<hr/>
+
+<h2>Kết Luận</h2>
+
+<p>
+  Bài giảng thứ hai mở rộng sự hiểu biết về công nghệ radar bằng việc đào sâu vào 
+  <strong>Radar Xung Doppler</strong> và <strong>Radar FMCW</strong>, nhấn mạnh vai trò của 
+  <em>xử lý tín hiệu tiên tiến</em> (MTI, Doppler Filter, CFAR, STAP) và <em>thiết kế dạng sóng</em> (waveform design).
+</p>
+
+<p>
+  Các nội dung cốt lõi bao gồm:
+</p>
+
+<ul>
+  <li>Phân tích chi tiết <strong>Radar Xung Doppler</strong>: cách đo vận tốc, lợi thế trong môi trường nhiều nhiễu nền.</li>
+  <li>Giới thiệu <strong>Radar FMCW</strong>: cách hoạt động, ưu nhược điểm và ví dụ ứng dụng.</li>
+  <li>Triển khai <strong>các phương pháp xử lý tín hiệu</strong>: MTI, FFT Doppler, CFAR, STAP.</li>
+  <li>Tầm quan trọng của <strong>dạng sóng</strong> (Chirp, Phase-coded, Non-linear FM…) và khả năng chống nhiễu.</li>
+  <li>Thách thức và xu hướng phát triển để đáp ứng nhu cầu ngày càng khắt khe về nhận dạng chính xác, tốc độ xử lý, chống nhiễu và tích hợp AI.</li>
+</ul>
+
+<p>
+  Tiếp nối thành tựu của Radar Xung Doppler và Radar FMCW, thế hệ radar tương lai hứa hẹn sẽ 
+  sử dụng sâu <strong>AI &amp; Machine Learning</strong> trong phân tích dữ liệu, tự động nhận dạng đa mục tiêu, 
+  phối hợp với nhiều nền tảng khác (quân sự, dân dụng, vũ trụ) để <em>nâng cao hiệu quả, tối ưu hóa tài nguyên</em> và 
+  đảm bảo an ninh, an toàn trên mọi lĩnh vực.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>

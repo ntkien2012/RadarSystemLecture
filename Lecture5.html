@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 5</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 5)</h1>
+
+<p class="note">
+  Tổng hợp từ hai video tham khảo:  
+  <a href="https://www.youtube.com/watch?v=hwX5oc9yv4M" target="_blank">Video 1</a>,  
+  <a href="https://www.youtube.com/watch?v=PmEHxluUWuc" target="_blank">Video 2</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+  <strong>Bài giảng 5</strong> tiếp tục mạch kiến thức nâng cao về radar, 
+  tập trung vào <em>khả năng chống chế áp điện tử (ECCM)</em>, 
+  <em>phát hiện mục tiêu tàng hình (Stealth Detection)</em>, 
+  cùng một số kỹ thuật tối ưu hóa hiệu năng radar trước những thách thức từ chiến tranh điện tử hiện đại.
+</p>
+
+<p>
+  Từ nội dung trong hai video, có thể tóm gọn những điểm chính như sau:
+</p>
+<ol>
+  <li>Khái niệm và kỹ thuật gây nhiễu (Jamming) cùng các biện pháp đối phó (ECCM).</li>
+  <li>Các đặc trưng của mục tiêu tàng hình (Stealth) và cách thức radar cải tiến để phát hiện.</li>
+  <li>Xu hướng tích hợp các kỹ thuật <em>chuyển tần liên tục</em>, <em>nhảy tần</em> (Frequency Hopping) và <em>lập biểu thời gian phát</em> (Time Scheduling).  
+  </li>
+</ol>
+
+<hr/>
+
+<h2>2. Khái niệm cơ bản về Chiến tranh điện tử (Electronic Warfare) và chế áp điện tử (ECM)</h2>
+
+<h3>2.1. Electronic Warfare (EW)</h3>
+<p>
+  <strong>Chiến tranh điện tử (EW)</strong> là tập hợp các biện pháp nhằm khai thác hoặc gây rối hệ thống điện từ của đối phương. 
+  Trong đó, radar luôn là một mục tiêu quan trọng vì radar cung cấp thông tin giám sát, cảnh giới, và điều khiển hỏa lực.
+</p>
+
+<h3>2.2. Gây nhiễu (Jamming) và ECM</h3>
+<p>
+  <strong>ECM (Electronic Countermeasure)</strong> là các hoạt động chủ động (Active) hoặc bị động (Passive) 
+  để ngăn hoặc giảm hiệu quả của radar đối phương. <em>Jamming</em> chủ động thường được chia thành:
+</p>
+<ul>
+  <li><strong>Noise Jamming</strong>: Phát sóng nhiễu trắng công suất cao, lấn át tín hiệu radar.</li>
+  <li><strong>Barrage Jamming</strong>: Mở rộng băng tần nhiễu, gây trở ngại cho nhiều dải tần radar.</li>
+  <li><strong>Spot Jamming</strong>: Tập trung công suất vào một tần số hẹp (thường là tần số radar đang sử dụng).</li>
+  <li><strong>Swept Jamming</strong>: Quét nhiễu qua các kênh tần số khác nhau trong thời gian ngắn.</li>
+</ul>
+
+<p>
+  Bên cạnh đó, có <em>ECM bị động</em> như rải <strong>chaff</strong> (sợi kim loại mảnh), 
+  <strong>decoy</strong> (mồi bẫy), để radar đối phương nhầm lẫn hoặc bão hòa mục tiêu.
+</p>
+
+<hr/>
+
+<h2>3. ECCM – Các biện pháp chống nhiễu và bảo vệ radar</h2>
+
+<h3>3.1. Thay đổi tần số (Frequency Agility)</h3>
+<p>
+  Radar liên tục nhảy tần (Frequency Hopping) hoặc lựa chọn ngẫu nhiên tần số phát xung trong từng đợt quét. 
+  Điều này làm đối phương khó “khóa” tần số để gây nhiễu hiệu quả.
+</p>
+
+<h3>3.2. Lập biểu thời gian phát (Time Scheduling)</h3>
+<p>
+  Điều chỉnh <em>thời gian phát xung</em> và <em>thứ tự quét</em> để giảm thiểu cơ hội đối phương theo dõi được mô hình tín hiệu radar. 
+  Một số radar hiện đại có thể phát xung với <strong>độ dài</strong>, <strong>PRF</strong> khác nhau trong mỗi chu kỳ quét.
+</p>
+
+<h3>3.3. Giảm độ lộ diện (Low Probability of Intercept – LPI Radar)</h3>
+<ul>
+  <li><strong>Công suất phát thấp,</strong> phát nhiều xung nhỏ và xử lý tích lũy năng lượng.  
+      Kẻ thù khó bắt được tín hiệu do mức phát quá nhỏ và được “trải” trong phổ rộng.</li>
+  <li><strong>Phân phối công suất tần số</strong> (Spread Spectrum), dùng công nghệ mảng pha chủ động (AESA) để hạn chế búp sóng phụ.</li>
+</ul>
+
+<h3>3.4. Xử lý tín hiệu nâng cao</h3>
+<ul>
+  <li><strong>Adaptive Filtering</strong>: Lọc thích nghi theo không gian – thời gian, loại bỏ các nhiễu chèn (jamming pulses).</li>
+  <li><strong>Doppler Compensation</strong>: Điều chỉnh tần số để chống các kỹ thuật “velocity gate pull-off” (làm “lệch” vận tốc radar đo).</li>
+</ul>
+
+<hr/>
+
+<h2>4. Phát hiện mục tiêu tàng hình (Stealth Detection)</h2>
+
+<h3>4.1. Mục tiêu tàng hình và đặc trưng RCS</h3>
+<p>
+  Mục tiêu tàng hình (Stealth) được thiết kế để <em>giảm RCS</em>, 
+  sử dụng vật liệu hấp thụ sóng (RAM – Radar Absorbing Material) hoặc hình khối góc, 
+  bề mặt nghiêng nhằm tán xạ sóng ra hướng khác.
+</p>
+
+<h3>4.2. Kỹ thuật radar phát hiện stealth</h3>
+<ul>
+  <li><strong>Sử dụng băng tần thấp (VHF, UHF)</strong>: Bước sóng lớn hơn kích thước cánh máy bay => hiệu ứng tàng hình giảm.</li>
+  <li><strong>Mở rộng băng thông (UWB Radar)</strong>: Nhận nhiều tần số phản xạ, khó che giấu đồng thời ở mọi tần.</li>
+  <li><strong>Radar mạng (Networked Radar)</strong>: Nhiều đài radar chia sẻ dữ liệu, tạo “lưới” quan sát đa hướng. 
+      Vật thể tàng hình dù né được một hướng, vẫn khó né mọi hướng chiếu.</li>
+  <li><strong>Radar thụ động (Passive Radar)</strong>: Tận dụng sóng phát thanh, truyền hình để dò tìm biến đổi pha, 
+      máy bay tàng hình khó “tránh” vì mục tiêu không biết nguồn sóng ở đâu.</li>
+</ul>
+
+<h3>4.3. Tích hợp AI cho phân tích nhiễu nhỏ</h3>
+<p>
+  Nhiều hệ thống bắt đầu kết hợp <strong>Machine Learning</strong>, 
+  <strong>Deep Learning</strong> để phân tích “chữ ký” Doppler hoặc <em>phân tách mẫu</em> (pattern recognition). 
+  Từ đó, <em>phát hiện những bất thường</em> trong nhiễu nền, dù mục tiêu có RCS rất nhỏ.
+</p>
+
+<hr/>
+
+<h2>5. Tối ưu hóa hiệu năng radar trong môi trường xung đột</h2>
+
+<p>
+  Hai video cung cấp nhiều ví dụ về <em>cách radar hiện đại đối phó</em> với xung đột điện tử: 
+  <strong>tự động chuyển tần, thay đổi PRF, điều khiển búp sóng</strong> (trên mảng pha AESA), 
+  cộng với <strong>mã sóng phức tạp</strong> (phase-coded, polyphase) để khó bị bắt bài.
+</p>
+
+<ul>
+  <li><strong>Ghép kênh đa băng tần (Multi-band)</strong>: Chia sẻ dải tần, “nhảy” sang kênh còn sạch (chưa bị gây nhiễu).</li>
+  <li><strong>Phối hợp cảm biến</strong>: Kết hợp radar với IRST (Infrared Search and Track), ESM (Electronic Support Measures), 
+      camera quang – hồng ngoại để “bù” điểm yếu của từng cảm biến.</li>
+  <li><strong>Mạng lưới radar</strong>: Liên kết nhiều đài radar có vị trí khác nhau, hợp nhất dữ liệu (data fusion), 
+      cho bức tranh thống nhất về không gian.</li>
+  <li><strong>Khả năng cập nhật phần mềm (SDR – Software Defined Radar)</strong>: Cho phép “sửa đổi” thuật toán ECCM, 
+      waveform… <em>theo thời gian thực</em> mà không cần thay thế phần cứng.</li>
+</ul>
+
+<hr/>
+
+<h2>6. Ứng dụng thực tế và xu hướng</h2>
+
+<p>
+  Kỹ thuật ECCM, phát hiện tàng hình đang trở thành yếu tố sống còn trong:
+</p>
+<ul>
+  <li><strong>Quân sự:</strong> Radar trên máy bay chiến đấu thế hệ 4.5/5, hệ thống phòng không – phòng thủ tên lửa.</li>
+  <li><strong>Hải quân:</strong> Radar tàu chiến tích hợp AESA, quét đa băng tần để đối phó tên lửa tàng hình.</li>
+  <li><strong>Bảo vệ biên giới, vùng đặc quyền kinh tế:</strong> Xây dựng mạng lưới radar VHF/UHF tầm xa, 
+      kết hợp radar trên máy bay giám sát, UAV.</li>
+  <li><strong>An ninh dân dụng:</strong> Dù <em>ít căng thẳng</em> như môi trường quân sự, 
+      nhưng công nghệ ECCM vẫn hữu ích trong ngăn chặn can nhiễu (tình huống khẩn cấp, khủng bố…).</li>
+</ul>
+
+<p>
+  Xu hướng <strong>kết hợp AI và Big Data</strong> trong radar hứa hẹn giúp hệ thống 
+  <em>“học hỏi” thủ đoạn gây nhiễu</em> của đối phương, 
+  <em>tự thích nghi</em> để nâng cao xác suất phát hiện mục tiêu tàng hình.
+</p>
+
+<hr/>
+
+<h2>7. Kết luận</h2>
+
+<p>
+  <strong>Bài giảng 5</strong> đã làm rõ tầm quan trọng của <em>khả năng chống chế áp điện tử (ECCM)</em> 
+  cũng như <em>phát hiện mục tiêu tàng hình</em> trong bối cảnh chiến tranh điện tử hiện đại. 
+  Các điểm chính gồm:
+</p>
+<ul>
+  <li><strong>Hiểu về ECM và jamming</strong>: Noise Jamming, Barrage, Spot, Swept Jamming…</li>
+  <li><strong>Phương pháp ECCM</strong>: Frequency Agility, Time Scheduling, LPI Radar, Adaptive Filtering…</li>
+  <li><strong>Stealth Detection</strong>: Băng tần thấp, UWB, radar mạng, radar thụ động, AI nhận dạng dấu hiệu đặc trưng.</li>
+  <li><strong>Tối ưu hiệu năng radar</strong>: Đa băng tần, mảng pha, data fusion, SDR… để khắc phục khi bị gây nhiễu.</li>
+</ul>
+
+<p>
+  Trong thực tế, năng lực <strong>chống nhiễu</strong> và <strong>phát hiện stealth</strong> 
+  là yếu tố cốt lõi quyết định độ tin cậy của radar. 
+  Các cải tiến về <em>xử lý tín hiệu số</em>, <em>công nghệ bán dẫn</em>, và <em>thuật toán AI</em> 
+  sẽ ngày càng thúc đẩy khả năng sinh tồn của radar trong <em>môi trường xung đột điện tử</em>.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>
