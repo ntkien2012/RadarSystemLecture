@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 8</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 8)</h1>
+
+<p class="note">
+  Nội dung tổng hợp từ ba video tham khảo:  
+  <a href="https://www.youtube.com/watch?v=rQGj1G9yD_Y" target="_blank">Video 1</a>,  
+  <a href="https://www.youtube.com/watch?v=2yEzO4x7jOc" target="_blank">Video 2</a>,  
+  <a href="https://www.youtube.com/watch?v=yRnhrrwpxV0" target="_blank">Video 3</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+  Trong <strong>Bài giảng 8</strong>, chúng ta tiếp tục khám phá những chủ đề nâng cao về radar, 
+  đồng thời đi sâu vào các lĩnh vực liên quan như:
+</p>
+<ol>
+  <li><strong>Radar xuyên đất (GPR – Ground Penetrating Radar)</strong> và ứng dụng khảo sát địa chất, công trình.</li>
+  <li><strong>Radar băng tần cao (mmWave, Sub-THz)</strong> trong giao thông thông minh, công nghiệp.</li>
+  <li><strong>Radar trong lĩnh vực an toàn – an ninh dân dụng</strong> và thách thức tích hợp.</li>
+</ol>
+
+<p>
+  Các video gợi ý một số minh chứng thực tế về khả năng radar tiếp cận những nhu cầu đặc thù, 
+  từ đó mở ra tiềm năng phát triển “phi truyền thống” (ngoài quân sự, hàng không, hàng hải).
+</p>
+
+<hr/>
+
+<h2>2. Radar xuyên đất (GPR – Ground Penetrating Radar)</h2>
+
+<h3>2.1. Định nghĩa và nguyên lý</h3>
+<p>
+  <strong>GPR (Ground Penetrating Radar)</strong> sử dụng sóng điện từ tần số cao (thường dải MHz tới GHz) 
+  để <em>xuyên vào đất</em> hoặc vật liệu, sau đó ghi nhận xung phản xạ từ các lớp bên trong.  
+  Mục đích: 
+</p>
+<ul>
+  <li>Xác định cấu trúc địa tầng (mật độ, rỗng, hang ngầm...)</li>
+  <li>Phát hiện vật chôn lấp (ống dẫn ngầm, cáp, bom mìn, di cốt khảo cổ...)</li>
+  <li>Kiểm tra tình trạng bê tông, móng cầu, hầm, đường xá</li>
+</ul>
+
+<h3>2.2. Các yếu tố ảnh hưởng</h3>
+<ul>
+  <li><strong>Độ ẩm và tính dẫn điện</strong> của đất: Đất ẩm, đất sét giàu khoáng dẫn điện cao => suy hao tín hiệu mạnh, hạn chế độ sâu quét GPR.</li>
+  <li><strong>Tần số ăng-ten GPR</strong>: Tần số cao (vài trăm MHz – GHz) cho độ phân giải tốt nhưng độ xuyên kém; tần số thấp (chục MHz) xuyên sâu hơn nhưng độ phân giải giảm.</li>
+  <li><strong>Nhiễu cục bộ</strong>: Kim loại, cốt thép, lớp đá xen lẫn gây nhiễu xung phản xạ.</li>
+</ul>
+
+<h3>2.3. Ứng dụng</h3>
+<p>
+  <strong>Video 1</strong> (<a href="https://www.youtube.com/watch?v=rQGj1G9yD_Y" target="_blank">Link</a>) trình bày cách một nhóm khảo sát dùng GPR 
+  để kiểm tra tình trạng nền móng và phát hiện khoang rỗng bên dưới mặt đường (có nguy cơ sụt lún). 
+  Ngoài ra, GPR được sử dụng rộng rãi trong:
+</p>
+<ul>
+  <li>Định vị ống nước, cáp quang, cáp điện ngầm trong đô thị</li>
+  <li>Quân sự: Phát hiện bom mìn, đường hầm, vật liệu nổ còn sót lại</li>
+  <li>Khảo cổ: Tìm dấu tích công trình cổ, mộ táng, đường hầm nhân tạo</li>
+</ul>
+
+<hr/>
+
+<h2>3. Radar băng tần cao (mmWave, Sub-THz) trong giao thông và công nghiệp</h2>
+
+<h3>3.1. Khái niệm băng mmWave</h3>
+<p>
+  <strong>mmWave (Millimeter Wave)</strong> thường nằm trong khoảng 30–300 GHz, tương đương bước sóng vài mm.  
+  Ở mức cao hơn (100–300 GHz), đôi khi được gọi là Sub-THz.  
+  So với radar băng C, X (4–12 GHz), mmWave có:
+</p>
+<ul>
+  <li><strong>Độ phân giải không gian cực cao</strong>, nhờ bước sóng nhỏ</li>
+  <li><strong>Ăng-ten gọn nhẹ</strong>, búp sóng hẹp, thích hợp tích hợp trên phương tiện (ô tô, drone)</li>
+  <li><strong>Suy hao khí quyển lớn</strong>, chỉ phù hợp cự ly ngắn đến trung bình</li>
+</ul>
+
+<h3>3.2. Ứng dụng giao thông thông minh</h3>
+<p>
+  <strong>Video 2</strong> (<a href="https://www.youtube.com/watch?v=2yEzO4x7jOc" target="_blank">Link</a>) đề cập radar mmWave 
+  trong xe hơi tự hành, cảnh báo va chạm, nhận diện người đi bộ, xe máy, v.v.  
+  Các ưu điểm:
+</p>
+<ul>
+  <li>Hoạt động tốt trong mưa, sương mù, ánh sáng yếu (khác với camera quang học)</li>
+  <li>Phát hiện đối tượng ở cự ly vài chục mét với độ chính xác cao</li>
+  <li>Giá thành ngày càng rẻ nhờ công nghệ chip mmWave CMOS, RFIC phát triển</li>
+</ul>
+
+<h3>3.3. Ứng dụng công nghiệp</h3>
+<ul>
+  <li><strong>Robot công nghiệp, tự động hóa</strong>: Radar mmWave gắn trên cánh tay robot, xe AGV (Automated Guided Vehicle) 
+      để tránh va chạm, nhận diện vật thể.</li>
+  <li><strong>An ninh nhà máy</strong>: Giám sát khu vực nguy hiểm (lò nung, lò phản ứng) nơi camera hồng ngoại hay bị bão hòa.</li>
+  <li><strong>Kiểm tra sản phẩm</strong>: Phát hiện khuyết tật bề mặt, đo độ dày vật liệu (thủy tinh, nhựa, gốm) ở dải Sub-THz.</li>
+</ul>
+
+<hr/>
+
+<h2>4. Radar cho an toàn – an ninh dân dụng</h2>
+
+<h3>4.1. Hệ thống kiểm soát đám đông, sân bay</h3>
+<p>
+  Ứng dụng radar tầm ngắn (<em>short-range radar</em>) để giám sát luồng người, phát hiện vật nguy hiểm ở cổng an ninh, 
+  hay theo dõi hành lang nhà ga, sân bay.  
+  Cụ thể:
+</p>
+<ul>
+  <li><strong>Radar quét cơ thể (Body Scanner)</strong>: Sử dụng băng tần mmWave để quét hành khách (như máy quét an ninh ở sân bay), 
+      tìm vật kim loại, vật lạ giấu trong quần áo.</li>
+  <li><strong>Kiểm soát an ninh và trật tự</strong>: Phân tích tập trung đông người, xác định người có biểu hiện bất thường.</li>
+</ul>
+
+<h3>4.2. Tích hợp trong tòa nhà thông minh</h3>
+<ul>
+  <li><strong>Cảm biến radar trong nhà</strong>: Giúp nhận biết chuyển động, ngã đột ngột (giám sát người già), 
+      điều khiển đèn chiếu sáng, điều hòa thông minh.</li>
+  <li><strong>Hệ thống chống trộm</strong>: Radar có thể phát hiện kẻ xâm nhập, phân biệt với thú cưng, giảm báo động giả.</li>
+</ul>
+
+<h3>4.3. Thách thức triển khai</h3>
+<p>
+  <strong>Video 3</strong> (<a href="https://www.youtube.com/watch?v=yRnhrrwpxV0" target="_blank">Link</a>) 
+  nói về những rào cản áp dụng radar dân dụng: 
+</p>
+<ul>
+  <li><strong>Quy định pháp lý về tần số</strong>: mmWave – Sub-THz chịu quản lý chặt chẽ vì liên quan băng tần viễn thông.</li>
+  <li><strong>Giao thoa – nhiễu chéo</strong>: Nhiều thiết bị công suất thấp đồng thời hoạt động trong dải ISM (24 GHz, 60 GHz, 77 GHz…), 
+      đòi hỏi cơ chế tránh nhiễu.</li>
+  <li><strong>Đảm bảo riêng tư</strong>: Radar trong môi trường dân dụng có thể “nhìn xuyên tường” mức độ nào đó, 
+      cần quy định rạch ròi tránh xâm phạm riêng tư.</li>
+</ul>
+
+<hr/>
+
+<h2>5. Xu hướng phát triển và kết hợp</h2>
+
+<p>
+  Bên cạnh các ứng dụng chuyên môn (GPR, mmWave radar, an ninh), bài giảng 8 và những nội dung liên quan 
+  còn nhấn mạnh đến <strong>xu hướng kết hợp</strong>:
+</p>
+<ul>
+  <li>
+    <strong>Sensor Fusion</strong>: 
+    Radar + Camera + LiDAR + IoT sensor => nhận thức môi trường đầy đủ, giảm sai số, phục vụ xe tự hành, 
+    nhà máy thông minh, giám sát đô thị.
+  </li>
+  <li>
+    <strong>Công nghệ vật liệu mới</strong>: 
+    Ăng-ten in 3D, sơn hấp thụ sóng (RAM) cho radar dân dụng, 
+    hoặc vật liệu xuyên sóng (radome) tối ưu hóa về khối lượng và chi phí.
+  </li>
+  <li>
+    <strong>Điện toán biên (Edge Computing)</strong>: 
+    Phần lớn dữ liệu radar được xử lý trực tiếp tại thiết bị (GPU, FPGA nhúng), 
+    giảm tải băng thông, tăng khả năng phản ứng theo thời gian thực.
+  </li>
+  <li>
+    <strong>Học máy và AI</strong>: 
+    Tiếp tục là chủ đề “nóng”, áp dụng cho mọi phân khúc radar, từ phòng không, hàng hải, đến dân dụng (phát hiện ngã, phân tích đám đông…).
+  </li>
+</ul>
+
+<hr/>
+
+<h2>6. Kết luận</h2>
+
+<p>
+  <strong>Bài giảng 8</strong> khái quát sự đa dạng của radar trong các ứng dụng <em>phi truyền thống</em> ngoài quân sự, hàng không:
+</p>
+<ul>
+  <li><strong>GPR</strong> cho khảo sát ngầm, kiểm tra kết cấu, tìm kiếm bom mìn, khảo cổ.</li>
+  <li><strong>Radar mmWave, Sub-THz</strong> cho xe tự hành, robot, giám sát công nghiệp với độ phân giải cao, tích hợp gọn nhẹ.</li>
+  <li><strong>An ninh dân dụng</strong>: Body scanner, chống trộm, theo dõi người già, kiểm soát đám đông.</li>
+  <li><strong>Xu hướng</strong>: Kết hợp đa cảm biến, AI, xử lý biên, mở rộng dải tần, tuân thủ quy định pháp lý &amp; bảo vệ quyền riêng tư.</li>
+</ul>
+
+<p>
+  Với tiến bộ liên tục về <em>xử lý tín hiệu số</em>, <em>công nghệ ăng-ten</em> và <em>chip RF</em>, 
+  radar đang dần trở thành một “cảm biến phổ thông” trong nhiều ngành, 
+  không chỉ gói gọn ở lĩnh vực quốc phòng hay giám sát truyền thống.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>

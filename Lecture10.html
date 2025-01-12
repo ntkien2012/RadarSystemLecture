@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Báo Cáo Radar - Bài Giảng 10</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+    }
+    ul, ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 4px;
+    }
+    hr {
+      margin: 2em 0;
+    }
+    .note {
+      font-style: italic;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>BÁO CÁO TỔNG HỢP KIẾN THỨC VỀ HỆ THỐNG RADAR (BÀI GIẢNG 10)</h1>
+
+<p class="note">
+  Nội dung tổng hợp từ hai video tham khảo:  
+  <a href="https://www.youtube.com/watch?v=Sl_yGeDelK8" target="_blank">Video 1</a>,  
+  <a href="https://www.youtube.com/watch?v=iUTWRHmHZLg" target="_blank">Video 2</a>.
+</p>
+
+<hr/>
+
+<h2>1. Giới thiệu</h2>
+
+<p>
+  <strong>Bài giảng 10</strong> khép lại loạt bài về radar, tập trung vào các chủ đề mang tính 
+  <em>tổng kết và ứng dụng thực tiễn</em>, bao gồm:
+</p>
+<ol>
+  <li>
+    <strong>Hệ thống radar tích hợp đa chức năng</strong> (multi-function radar), 
+    đáp ứng yêu cầu ngày càng cao của quân sự – dân sự.
+  </li>
+  <li>
+    <strong>Những yêu cầu mới về chuẩn kỹ thuật, an toàn</strong>, xu hướng “thông minh hóa” và “tự động hóa” 
+    trong vận hành radar.
+  </li>
+  <li>
+    <strong>Tầm nhìn tương lai</strong>: Kết hợp radar với công nghệ viễn thông, dẫn đường, điện toán đám mây, v.v.
+  </li>
+</ol>
+
+<p>
+  Hai video gợi ý một loạt ví dụ và phân tích case study về việc hiện đại hóa radar. 
+  Dưới đây là tóm tắt nội dung chính.
+</p>
+
+<hr/>
+
+<h2>2. Radar tích hợp đa chức năng (Multi-function Radar)</h2>
+
+<h3>2.1. Định nghĩa và động lực</h3>
+<p>
+  <strong>Multi-function Radar</strong> là xu hướng dùng <em>một hệ thống radar</em> đảm nhiệm 
+  <strong>nhiều nhiệm vụ</strong> khác nhau, chẳng hạn:
+</p>
+<ul>
+  <li>Giám sát (Surveillance)</li>
+  <li>Theo dõi và điều khiển hỏa lực (Tracking &amp; Fire Control)</li>
+  <li>Hỗ trợ dẫn đường (Navigation Guidance)</li>
+  <li>Cảnh báo sớm (Early Warning)</li>
+</ul>
+<p>
+  Việc tích hợp này giúp <strong>tiết kiệm chi phí</strong>, <strong>giảm không gian lắp đặt</strong>, 
+  đồng thời <strong>tận dụng tối đa tài nguyên ăng-ten, băng thông</strong>. 
+  Động lực đến từ nhu cầu <em>tác chiến đa môi trường</em> (quân sự) và <em>giám sát phức hợp</em> (dân sự).
+</p>
+
+<h3>2.2. Yêu cầu kỹ thuật</h3>
+<ul>
+  <li>
+    <strong>Băng tần linh hoạt</strong>: 
+    Radar đa chức năng cần làm việc trên nhiều dải tần (L, S, C, X...) tùy từng bài toán.
+  </li>
+  <li>
+    <strong>Ăng-ten mảng pha (AESA)</strong>: 
+    Quét điện tử cực nhanh, chia búp sóng độc lập cho từng nhiệm vụ.
+  </li>
+  <li>
+    <strong>Phần mềm điều phối (Scheduler)</strong>: 
+    Quản lý tài nguyên radar, phân chia thời gian và tần số, tránh xung đột giữa các chức năng.
+  </li>
+  <li>
+    <strong>Xử lý tín hiệu tiên tiến</strong>: 
+    Dùng AI/ML để tự động nhận diện mục tiêu, quyết định mức ưu tiên (phòng không, dẫn đường...).
+  </li>
+</ul>
+
+<p>
+  <em>Video 1</em> (<a href="https://www.youtube.com/watch?v=Sl_yGeDelK8" target="_blank">Link</a>) 
+  minh họa một radar hàng hải hiện đại, vừa giám sát bờ biển, vừa theo dõi tàu thuyền, 
+  đồng thời cảnh báo thời tiết xấu (như radar thời tiết) khi cần.
+</p>
+
+<hr/>
+
+<h2>3. Quản lý an toàn và chuẩn hóa radar</h2>
+
+<h3>3.1. An toàn bức xạ và môi trường</h3>
+<ul>
+  <li><strong>Các tiêu chuẩn quốc tế (ICNIRP, FCC)</strong> quy định mức phơi nhiễm bức xạ EM 
+      cho nhân viên vận hành và dân cư xung quanh.</li>
+  <li><strong>Hệ thống cảnh báo an toàn</strong> (Safety Interlocks) tự động ngắt phát khi có người tiến vào khu vực nguy hiểm.</li>
+  <li><strong>Bảo vệ môi trường</strong>: Giảm công suất phát và sử dụng xung hẹp, công nghệ bán dẫn tiết kiệm năng lượng.</li>
+</ul>
+
+<h3>3.2. Chuẩn hóa kết nối và tích hợp</h3>
+<ul>
+  <li>
+    <strong>Chuẩn IP-based</strong>: 
+    Nhiều radar thế hệ mới tương thích mạng LAN/WAN, sử dụng IP, UDP, TCP để trao đổi dữ liệu với trung tâm điều khiển.
+  </li>
+  <li>
+    <strong>Hợp chuẩn công nghiệp, quân sự</strong>: 
+    MIL-STD (quân sự Mỹ), STANAG (NATO), IEC (dân dụng)... đảm bảo tính tương thích và chất lượng.
+  </li>
+  <li>
+    <strong>An ninh mạng</strong>: 
+    Radar kết nối Internet cần mã hóa dữ liệu, xác thực truy cập, phòng chống tấn công xâm nhập.
+  </li>
+</ul>
+
+<p>
+  <em>Video 2</em> (<a href="https://www.youtube.com/watch?v=iUTWRHmHZLg" target="_blank">Link</a>) 
+  đề cập ví dụ về hệ thống radar sân bay (Airport Surveillance Radar) phối hợp với hệ thống kiểm soát không lưu (ATC) 
+  qua giao thức ASTERIX, giúp chia sẻ dữ liệu thời gian thực một cách chuẩn hóa.
+</p>
+
+<hr/>
+
+<h2>4. Xu hướng “thông minh hóa” và “tự động hóa” radar</h2>
+
+<h3>4.1. AI và tự động ra quyết định</h3>
+<ul>
+  <li><strong>Phân loại mục tiêu tự động</strong>: Áp dụng deep learning, CNN để gán nhãn máy bay thương mại, UAV, chim, v.v.</li>
+  <li><strong>Quản lý tài nguyên radar động</strong>: Thuật toán AI tính toán búp sóng, tần số, PRF tối ưu theo tình hình mục tiêu.</li>
+  <li><strong>Xử lý big data</strong>: Lưu trữ và phân tích dữ liệu từ nhiều ngày, phát hiện xu hướng, dấu hiệu bất thường (gián điệp, xâm nhập…).</li>
+</ul>
+
+<h3>4.2. Radar “khép kín” (Autonomous Radar)</h3>
+<p>
+  Ý tưởng “khép kín” ở đây chỉ radar có thể tự:
+</p>
+<ul>
+  <li><strong>Cấu hình &amp; bảo trì</strong>: Theo dõi sức khỏe thiết bị, tự chuẩn đoán, gửi báo cáo khi cần sửa chữa (Predictive Maintenance).</li>
+  <li><strong>Phát hiện &amp; chống nhiễu</strong>: Tự động đổi tần số, thay đổi waveform khi bị gây nhiễu.</li>
+  <li><strong>Phân phối dữ liệu</strong>: Tự xác định ưu tiên, gửi thông tin quan trọng lên trung tâm hoặc sang radar khác, tránh quá tải mạng.</li>
+</ul>
+
+<hr/>
+
+<h2>5. Tầm nhìn tương lai</h2>
+
+<ul>
+  <li>
+    <strong>Liên kết radar – viễn thông (Radar-Communication Convergence)</strong>:  
+    Các trạm 5G/6G kiêm chức năng radar tầm ngắn, theo dõi giao thông đường bộ, máy bay không người lái.
+  </li>
+  <li>
+    <strong>Radar đám mây (Cloud-Based Radar)</strong>:  
+    Thu dữ liệu tại chỗ (edge), truyền xử lý lên cloud, chia sẻ nguồn lực tính toán khổng lồ, 
+    thích hợp cho các đô thị thông minh.
+  </li>
+  <li>
+    <strong>Tích hợp trong “metaverse” vật lý – ảo</strong>:  
+    Mô phỏng trực quan radar và môi trường 3D, hỗ trợ vận hành, đào tạo, thậm chí điều khiển từ xa.
+  </li>
+  <li>
+    <strong>Laser Radar (Lidar) &amp; Radar quang học</strong>:  
+    Có thể kết hợp radar RF truyền thống với tia laser quét (Lidar), tạo sensor fusion siêu chính xác trong giao thông tự hành, robotics.
+  </li>
+</ul>
+
+<hr/>
+
+<h2>6. Kết luận</h2>
+
+<p>
+  <strong>Bài giảng 10</strong> là phần tổng kết, khái quát lại những xu hướng lớn trong công nghệ radar hiện đại:
+</p>
+<ul>
+  <li><strong>Radar đa chức năng</strong>: Tối ưu “tất cả trong một”, phục vụ nhiều nhiệm vụ giám sát, cảnh báo, dẫn đường, hỏa lực.</li>
+  <li><strong>Quản lý an toàn – chuẩn hóa</strong>: Đảm bảo an toàn bức xạ, tuân thủ tiêu chuẩn quốc tế, bảo mật dữ liệu, sẵn sàng kết nối mạng.</li>
+  <li><strong>Thông minh &amp; tự động</strong>: Ứng dụng AI, Big Data, edge computing, tự tối ưu tài nguyên, phòng chống nhiễu.</li>
+  <li><strong>Tầm nhìn tương lai</strong>: Radar – viễn thông “song hành”, radar đám mây, fusion sensor, Lidar, hướng tới đô thị thông minh và phòng thủ hiện đại.</li>
+</ul>
+
+<p>
+  Như vậy, loạt bài giảng về radar đã phác họa đầy đủ: 
+  từ <em>nguyên lý truyền thống</em>, <em>xử lý tín hiệu</em>, <em>các loại hình radar</em> (xung, Doppler, FMCW, SAR, ISAR…), 
+  tới <em>công nghệ tiên tiến</em> (AESA, radar mạng, radar lượng tử…) và <em>triển vọng tương lai</em>.  
+  Hiểu rõ những kiến thức này sẽ giúp các kỹ sư, nhà nghiên cứu và người vận hành 
+  <strong>nâng cao năng lực thiết kế, quản lý và triển khai</strong> hệ thống radar trong mọi lĩnh vực.
+</p>
+
+<hr/>
+
+<p><em>Người thực hiện báo cáo:</em><br/>
+(Họ tên sinh viên)</p>
+<p><em>Ngày hoàn thành báo cáo:</em><br/>
+(Ngày/Tháng/Năm)</p>
+
+</body>
+</html>
